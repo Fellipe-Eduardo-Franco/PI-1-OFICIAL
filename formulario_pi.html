@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Justificativa de Faltas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            color: #555;
+        }
+        input[type="text"], input[type="number"], input[type="date"], input[type="time"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .radio-group label, .checkbox-group label {
+            margin: 0;
+        }
+        .hidden {
+            display: none;
+        }
+        .btn-submit {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-submit:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulário de Justificativa de Faltas</h1>
+        <form id="justificativa-form">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="matricula">Matrícula:</label>
+            <input type="number" id="matricula" name="matricula" required minlength="5" maxlength="5">
+
+            <label for="curso">Curso:</label>
+            <div class="checkbox-group" id="curso">
+                <label><input type="checkbox" name="curso" value="GE"> GE</label>
+                <label><input type="checkbox" name="curso" value="GPI"> GPI</label>
+                <label><input type="checkbox" name="curso" value="GTI"> GTI</label>
+                <label><input type="checkbox" name="curso" value="DSM"> DSM</label>
+            </div>
+
+            <label for="hae">HAE:</label>
+            <input type="checkbox" id="hae" name="hae">
+
+            <label for="periodo-inicio">Período (Início):</label>
+            <input type="date" id="periodo-inicio" name="periodo-inicio" required>
+
+            <label for="periodo-fim">Período (Término):</label>
+            <input type="date" id="periodo-fim" name="periodo-fim" required>
+
+            <label>Justificativa:</label>
+            <div class="radio-group" id="justificativa">
+                <label><input type="radio" name="justificativa" value="licenca-medica" required> Licença Médica</label>
+                <label><input type="radio" name="justificativa" value="falta-justificada"> Falta Justificada</label>
+                <label><input type="radio" name="justificativa" value="falta-injustificada"> Falta Injustificada</label>
+                <label><input type="radio" name="justificativa" value="faltas-legislacao"> Faltas previstas na Legislação</label>
+            </div>
+
+            <div id="licenca-medica-options" class="hidden">
+                <label>Opções de Licença Médica:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="licenca-medica" value="falta-medica"> Falta Médica</label>
+                    <label><input type="radio" name="licenca-medica" value="comparecimento-medico"> Comparecimento ao Médico</label>
+                    <label><input type="radio" name="licenca-medica" value="licenca-saude"> Licença Saúde</label>
+                    <label><input type="radio" name="licenca-medica" value="licenca-maternidade"> Licença Maternidade</label>
+                </div>
+                <div id="horario-comparecimento-medico" class="hidden">
+                    <label for="hora-inicio">Horário de Início:</label>
+                    <input type="time" id="hora-inicio" name="hora-inicio">
+                    <label for="hora-termino">Horário de Término:</label>
+                    <input type="time" id="hora-termino" name="hora-termino">
+                </div>
+            </div>
+
+            <div id="falta-justificada-options" class="hidden">
+                <label>Opções de Falta Justificada:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="falta-justificada" value="falta"> Falta</label>
+                    <label><input type="radio" name="falta-justificada" value="saida-antecipada"> Saída Antecipada</label>
+                </div>
+                <div id="horario-saida-antecipada" class="hidden">
+                    <label for="hora-inicio-saida">Horário de Início:</label>
+                    <input type="time" id="hora-inicio-saida" name="hora-inicio-saida">
+                    <label for="hora-termino-saida">Horário de Término:</label>
+                    <input type="time" id="hora-termino-saida" name="hora-termino-saida">
+                </div>
+            </div>
+
+            <div id="falta-injustificada-options" class="hidden">
+                <label>Opções de Falta Injustificada:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="falta-injustificada" value="falta"> Falta</label>
+                    <label><input type="radio" name="falta-injustificada" value="saida-antecipada"> Saída Antecipada</label>
+                </div>
+                <div id="horario-saida-antecipada-injustificada" class="hidden">
+                    <label for="hora-inicio-saida-injustificada">Horário de Início:</label>
+                    <input type="time" id="hora-inicio-saida-injustificada" name="hora-inicio-saida-injustificada">
+                    <label for="hora-termino-saida-injustificada">Horário de Término:</label>
+                    <input type="time" id="hora-termino-saida-injustificada" name="hora-termino-saida-injustificada">
+                </div>
+            </div>
+
+            <div id="faltas-legislacao-options" class="hidden">
+                <label>Opções para Faltas previstas na Legislação:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="faltas-legislacao" value="falecimento-conjuge"> Falecimento de cônjuge, pai, mãe, filho</label>
+                    <label><input type="radio" name="faltas-legislacao" value="falecimento-ascendente"> Falecimento ascendente (exceto pai e mãe), descendente (exceto filho), irmão ou dependente</label>
+                    <label><input type="radio" name="faltas-legislacao" value="casamento"> Casamento</label>
+                    <label><input type="radio" name="faltas-legislacao" value="nascimento-filho"> Nascimento de filho</label>
+                    <label><input type="radio" name="faltas-legislacao" value="consulta-gravidez"> Acompanhamento da esposa/companheiro em consulta médica, durante a gravidez</label>
+                    <label><input type="radio" name="faltas-legislacao" value="consulta-filho"> Acompanhamento de filho(a) de até 6 anos em consulta médica</label>
+                    <label><input type="radio" name="faltas-legislacao" value="doacao-sangue"> Doação de sangue</label>
+                    <label><input type="radio" name="faltas-legislacao" value="alistamento-eleitor"> Alistamento como eleitor</label>
+                    <label><input type="radio" name="faltas-legislacao" value="depoimento-judicial"> Convocação para depoimento judicial</label>
+                    <label><input type="radio" name="faltas-legislacao" value="participacao-juri"> Convocação para participação em júri</label>
+                    <label><input type="radio" name="faltas-legislacao" value="servico-eleitoral"> Convocação para serviço eleitoral</label>
+                    <label><input type="radio" name="faltas-legislacao" value="mesa-eleitoral"> Convocação para compor mesa ou junta eleitoral</label>
+                    <label><input type="radio" name="faltas-legislacao" value="prova-vestibular"> Realização de prova vestibular</label>
+                    <label><input type="radio" name="faltas-legislacao" value="justica-trabalho"> Atendimento de chamado da Justiça do Trabalho</label>
+                    <label><input type="radio" name="faltas-legislacao" value="acidente-transporte"> Acidente de transporte</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('justificativa-form').addEventListener('change', function (event) {
+            const licencaMedicaOptions = document.getElementById('licenca-medica-options');
+            const faltaJustificadaOptions = document.getElementById('falta-justificada-options');
+            const faltaInjustificadaOptions = document.getElementById('falta-injustificada-options');
+            const faltasLegislacaoOptions = document.getElementById('faltas-legislacao-options');
+
+            licencaMedicaOptions.classList.add('hidden');
+            faltaJustificadaOptions.classList.add('hidden');
+            faltaInjustificadaOptions.classList.add('hidden');
+            faltasLegislacaoOptions.classList.add('hidden');
+
+            if (event.target.name === 'justificativa') {
+                if (event.target.value === 'licenca-medica') {
+                    licencaMedicaOptions.classList.remove('hidden');
+                } else if (event.target.value === 'falta-justificada') {
+                    faltaJustificadaOptions.classList.remove('hidden');
+                } else if (event.target.value === 'falta-injustificada') {
+                    faltaInjustificadaOptions.classList.remove('hidden');
+                } else if (event.target.value === 'faltas-legislacao') {
+                    faltasLegislacaoOptions.classList.remove('hidden');
+                }
+            }
+
+            const comparecimentoMedico = document.querySelector('input[name="licenca-medica"][value="comparecimento-medico"]');
+            const saidaAntecipada = document.querySelector('input[name="falta-justificada"][value="saida-antecipada"]');
+            const saidaAntecipadaInjustificada = document.querySelector('input[name="falta-injustificada"][value="saida-antecipada"]');
+
+            document.getElementById('horario-comparecimento-medico').classList.toggle('hidden', !comparecimentoMedico.checked);
+            document.getElementById('horario-saida-antecipada').classList.toggle('hidden', !saidaAntecipada.checked);
+            document.getElementById('horario-saida-antecipada-injustificada').classList.toggle('hidden', !saidaAntecipadaInjustificada.checked);
+        });
+    </script>
+</body>
+</html>
